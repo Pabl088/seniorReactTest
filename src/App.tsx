@@ -1,6 +1,6 @@
-import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import ArticlesList from "./features/articles/components/ArticlesList";
+import ArticlesList from "./features/articles/pages/ArticlesList";
+import "./App.css";
 
 const App: React.FC = () => (
   <Routes>

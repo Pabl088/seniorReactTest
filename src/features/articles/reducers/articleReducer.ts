@@ -4,6 +4,8 @@ import { Article, ArticlesState } from "../interfaces/article.interfaces";
 const initialState: ArticlesState = {
   articles: [],
   favorites: [],
+  filter: "",
+  page: 1,
 };
 
 const articlesSlice = createSlice({
@@ -21,8 +23,14 @@ const articlesSlice = createSlice({
         state.favorites.push(id);
       }
     },
+    setFilter(state, action: PayloadAction<string>) {
+      state.filter = action.payload;
+    },
+    setPage(state, action: PayloadAction<number>) {
+      state.page = action.payload;
+    },
   },
 });
 
-export const { setArticles, toggleFavorite } = articlesSlice.actions;
+export const { setArticles, toggleFavorite, setFilter, setPage } = articlesSlice.actions;
 export default articlesSlice.reducer;
