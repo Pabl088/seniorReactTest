@@ -10,9 +10,9 @@ import PaginationControls from "../components/PaginationControls";
 const ArticlesList: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { articles, filter, page } = useSelector((state: RootState) => state.articles);
+  const { articles, filter, page, favorites } = useSelector((state: RootState) => state.articles);
 
-  const articlesPerPage = 10;
+  const articlesPerPage = 9;
 
   const { data, isLoading } = useArticles();
 
@@ -23,9 +23,10 @@ const ArticlesList: React.FC = () => {
   }, [data, dispatch]);
 
   const filteredArticles = useMemo(() => {
+    dispatch(setPage(1));
     if (!articles) return [];
     return articles.filter(article => article.title.toLowerCase().includes(filter.toLowerCase()));
-  }, [articles, filter]);
+  }, [articles, filter, dispatch]);
 
   const paginatedArticles = useMemo(() => {
     const startIndex = (page - 1) * articlesPerPage;
@@ -39,14 +40,14 @@ const ArticlesList: React.FC = () => {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="flex flex-col items-center">
-          <p className="text-9xl font-bold text-gray-500">Loading articles...</p>
+          <p className="text-6xl font-bold text-gray-500">Loading articles...</p>
         </div>
       </div>
     );
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
-      <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Articles</h1>
+      <h1 className="text-6xl font-bold mb-6 text-center text-blue-500">Articles</h1>
 
       <div className="mb-6 flex justify-center">
         <ArticlesFilter filter={filter} setFilter={value => dispatch(setFilter(value))} />
@@ -54,7 +55,7 @@ const ArticlesList: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {paginatedArticles.map(article => (
-          <ArticleCard key={article.id} id={article.id} title={article.title} content={article.content} isFavorite={article.isFavorite} />
+          <ArticleCard key={article.id} id={article.id} title={article.title} content={article.content} isFavorite={favorites.includes(article.id)} />
         ))}
       </div>
 

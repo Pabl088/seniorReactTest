@@ -6,12 +6,12 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ id, title, content, isFavorit
   const dispatch = useDispatch();
 
   return (
-    <div className="border p-4 mb-4 justify-between items-center">
+    <div className="border p-4 mb-4 flex flex-col justify-between items-center">
       <div className="w-full">
         <h2 className="text-xl font-semibold">{title}</h2>
         <p>{content}</p>
       </div>
-      <button onClick={() => dispatch(toggleFavorite(id))} className={` mb-4${isFavorite ? "bg-red-500" : "bg-blue-500"} text-white`}>
+      <button onClick={() => dispatch(toggleFavorite(id))} className={`mb-4 mt-2 ${isFavorite ? "bg-red-500" : "bg-blue-500"} text-white`}>
         {isFavorite ? "Unfavorite" : "Favorite"}
       </button>
     </div>

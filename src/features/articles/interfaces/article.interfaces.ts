@@ -3,7 +3,6 @@ export interface Article {
   title: string;
   content: string;
   rating: number;
-  isFavorite: boolean;
   category: string;
   subCategory: string;
   author: string;
