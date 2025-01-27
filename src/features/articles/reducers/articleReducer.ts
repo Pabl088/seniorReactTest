@@ -29,8 +29,12 @@ const articlesSlice = createSlice({
       const { id, content } = action.payload;
       state.articles = state.articles.map(article => (article.id === id ? { ...article, content } : article));
     },
+    updateArticleRating(state, action: PayloadAction<{ id: number; rating: number }>) {
+      const { id, rating } = action.payload;
+      state.articles = state.articles.map(article => (article.id === id ? { ...article, rating } : article));
+    },
   },
 });
 
-export const { setArticles, toggleFavorite, updateArticleTitle, updateArticleContent } = articlesSlice.actions;
+export const { setArticles, toggleFavorite, updateArticleTitle, updateArticleContent, updateArticleRating } = articlesSlice.actions;
 export default articlesSlice.reducer;

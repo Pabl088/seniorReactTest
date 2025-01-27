@@ -47,7 +47,7 @@ export const LexicalArticleEditor: React.FC<{ articleId: number; text: string; t
           {isEditable ? (
             <SaveButtonLexicalEditor articleId={articleId} setIsEditable={setIsEditable} toEdit={toEdit} />
           ) : (
-            <button onClick={() => setIsEditable(true)} className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+            <button onClick={() => setIsEditable(true)} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-gray-600">
               Edit
             </button>
           )}

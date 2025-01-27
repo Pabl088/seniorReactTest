@@ -12,6 +12,7 @@ const App: React.FC = () => (
     <Route path="/articles/:id" element={<ArticleDetail />} />
     <Route path="/articles/create" element={<ArticuleCreate />} />
     <Route path="/articles/categories" element={<ArticlesCategories />} />
+    <Route path="*" element={<Navigate to="/articles" replace />} />
   </Routes>
 );
 
