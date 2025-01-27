@@ -1,35 +1,33 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../global-store/store";
+import BackButton from "../components/BackButton";
+import { LexicalEditor } from "../components/LexicalEditor";
 
 const ArticleDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const article = useSelector((state: RootState) => state.articles.articles.find(article => article.id === Number(id)));
+  const article = useSelector((state: RootState) => state.articlesStore.articles.find(article => article.id === Number(id)));
 
   if (!article) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-gray-500 text-lg">Article not found</p>
+      <div className="flex flex-col justify-center h-screen">
+        <p className="text-white text-6xl font-bold">Article not found</p>
+        <BackButton />
       </div>
     );
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="p-6 mx-auto max-w-4xl">
       <header className="mb-6">
-        <h1 className="text-4xl font-bold text-gray-800">{article.title}</h1>
-        <p className="text-gray-500 mt-2">By {article.author}</p>
+        <h1 className="text-5xl font-bold text-blue-500">{article.title}</h1>
+        <p className="text-gray-400 mt-2">By {article.author}</p>
       </header>
 
-      <section className="prose max-w-none text-gray-700">
-        <p>{article.content}</p>
-      </section>
+      <LexicalEditor article={article} />
 
-      <div className="mt-6">
-        <button onClick={() => window.history.back()} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-          Go Back
-        </button>
+      <div className="mt-4">
+        <BackButton />
       </div>
     </div>
   );

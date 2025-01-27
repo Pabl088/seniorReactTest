@@ -3,7 +3,7 @@ import articlesReducer from "../features/articles/reducers/articleReducer";
 
 export const store = configureStore({
   reducer: {
-    articles: articlesReducer,
+    articlesStore: articlesReducer,
   },
 });
 

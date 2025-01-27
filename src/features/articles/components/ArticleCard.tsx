@@ -14,7 +14,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ id, title, content, isFavorit
   };
 
   return (
-    <div onClick={handleNavigate} className="border p-4 mb-4 flex flex-col justify-between items-center transition-transform transform hover:scale-105">
+    <div onClick={handleNavigate} className="border p-4 mb-4 flex flex-col justify-between items-center transition-transform transform hover:scale-105 cursor-pointer">
       <div className="w-full">
         <h2 className="text-xl font-semibold">{title}</h2>
         <p>{content}</p>

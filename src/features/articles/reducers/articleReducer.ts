@@ -9,7 +9,7 @@ const initialState: ArticlesState = {
 };
 
 const articlesSlice = createSlice({
-  name: "articles",
+  name: "articlesState",
   initialState,
   reducers: {
     setArticles(state, action: PayloadAction<Article[]>) {
@@ -29,8 +29,12 @@ const articlesSlice = createSlice({
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
     },
+    updateArticleContent(state, action: PayloadAction<{ id: number; content: string }>) {
+      const { id, content } = action.payload;
+      state.articles = state.articles.map(article => (article.id === id ? { ...article, content } : article));
+    },
   },
 });
 
-export const { setArticles, toggleFavorite, setFilter, setPage } = articlesSlice.actions;
+export const { setArticles, toggleFavorite, setFilter, setPage, updateArticleContent } = articlesSlice.actions;
 export default articlesSlice.reducer;
