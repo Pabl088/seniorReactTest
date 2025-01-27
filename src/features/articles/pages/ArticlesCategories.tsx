@@ -5,7 +5,7 @@ import ArticleCard from "../components/ArticleCard";
 import PaginationControls from "../components/PaginationControls";
 import BackButton from "../components/BackButton";
 
-const ArticlesCategorys: React.FC = () => {
+const ArticlesCategories: React.FC = () => {
   const { articles, favorites } = useSelector((state: RootState) => state.articlesStore);
 
   const [filter, setFilter] = useState("");
@@ -100,4 +100,4 @@ const ArticlesCategorys: React.FC = () => {
   );
 };
 
-export default ArticlesCategorys;
+export default ArticlesCategories;

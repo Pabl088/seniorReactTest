@@ -6,6 +6,7 @@ import ArticleCard from "../components/ArticleCard";
 import ArticlesFilter from "../components/ArticlesFilter";
 import PaginationControls from "../components/PaginationControls";
 import { useNavigate } from "react-router-dom";
+import { NotFoundArticles } from "../components/NotFoundArticles";
 
 const ArticlesList: React.FC = () => {
   const navigate = useNavigate();
@@ -57,8 +58,8 @@ const ArticlesList: React.FC = () => {
       </div>
 
       <div className="mb-5 md:absolute md:top-28 md:right-52 md:z-5">
-        <button onClick={() => navigate("/articles/categorys")} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-          By Categorys
+        <button onClick={() => navigate("/articles/categories")} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          By Categories
         </button>
       </div>
 
@@ -66,15 +67,20 @@ const ArticlesList: React.FC = () => {
         <ArticlesFilter filter={filter} setFilter={value => setFilter(value)} />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {paginatedArticles.map(article => (
-          <ArticleCard key={article.id} id={article.id} title={article.title} content={article.content} isFavorite={favorites.includes(article.id)} />
-        ))}
-      </div>
-
-      <div className="mt-8 flex justify-center">
-        <PaginationControls currentPage={page} totalPages={totalPages} onPageChange={newPage => setPage(newPage)} />
-      </div>
+      {paginatedArticles.length === 0 ? (
+        <NotFoundArticles />
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {paginatedArticles.map(article => (
+              <ArticleCard key={article.id} id={article.id} title={article.title} content={article.content} isFavorite={favorites.includes(article.id)} />
+            ))}
+          </div>
+          <div className="mt-8 flex justify-center">
+            <PaginationControls currentPage={page} totalPages={totalPages} onPageChange={newPage => setPage(newPage)} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

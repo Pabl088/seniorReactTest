@@ -3,18 +3,14 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../global-store/store";
 import BackButton from "../components/BackButton";
 import { LexicalArticleEditor } from "../components/LexicalArticleEditor";
+import { NotFoundArticles } from "../components/NotFoundArticles";
 
 const ArticleDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const article = useSelector((state: RootState) => state.articlesStore.articles.find(article => article.id === Number(id)));
 
   if (!article) {
-    return (
-      <div className="flex flex-col justify-center h-screen">
-        <p className="text-white text-6xl font-bold">Article not found</p>
-        <BackButton />
-      </div>
-    );
+    return <NotFoundArticles />;
   }
 
   return (
