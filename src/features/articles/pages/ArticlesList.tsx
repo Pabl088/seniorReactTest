@@ -6,9 +6,11 @@ import { useArticles } from "../hooks/useArticles";
 import ArticleCard from "../components/ArticleCard";
 import ArticlesFilter from "../components/ArticlesFilter";
 import PaginationControls from "../components/PaginationControls";
+import { useNavigate } from "react-router-dom";
 
 const ArticlesList: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { isLoading } = useArticles();
 
@@ -43,8 +45,14 @@ const ArticlesList: React.FC = () => {
     );
 
   return (
-    <div className="p-4 mx-auto">
+    <div className="p-4 mx-auto relative">
       <h1 className="text-6xl font-bold mb-6 text-center text-blue-500">Articles</h1>
+
+      <div className="mb-5 md:absolute md:top-28 md:right-10 md:z-5">
+        <button onClick={() => navigate("/articles/create")} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          Create Article
+        </button>
+      </div>
 
       <div className="mb-6 flex justify-center">
         <ArticlesFilter filter={filter} setFilter={value => dispatch(setFilter(value))} />
