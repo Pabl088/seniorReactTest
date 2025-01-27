@@ -12,8 +12,6 @@ export interface Article {
 export interface ArticlesState {
   articles: Article[];
   favorites: number[];
-  filter: string;
-  page: number;
 }
 
 export interface ArticleCardProps {

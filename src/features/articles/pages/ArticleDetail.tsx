@@ -19,10 +19,10 @@ const ArticleDetail: React.FC = () => {
 
   return (
     <div className="p-6 mx-auto max-w-4xl">
-      <header className="mb-6">
+      <div className="mb-6">
         <LexicalArticleEditor articleId={article.id} text={article.title} toEdit="TITLE" />
         <p className="text-gray-400 mt-2">By {article.author}</p>
-      </header>
+      </div>
 
       <LexicalArticleEditor articleId={article.id} text={article.content} toEdit="CONTENT" />
 
