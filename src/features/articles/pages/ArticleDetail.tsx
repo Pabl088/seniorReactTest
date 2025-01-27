@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../global-store/store";
 import BackButton from "../components/BackButton";
-import { LexicalEditor } from "../components/LexicalEditor";
+import { LexicalArticleEditor } from "../components/LexicalArticleEditor";
 
 const ArticleDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -20,11 +20,12 @@ const ArticleDetail: React.FC = () => {
   return (
     <div className="p-6 mx-auto max-w-4xl">
       <header className="mb-6">
-        <h1 className="text-5xl font-bold text-blue-500">{article.title}</h1>
+        {/* <h1 className="text-5xl font-bold text-blue-500">{article.title}</h1> */}
+        <LexicalArticleEditor articleId={article.id} text={article.title} toEdit="TITLE" />
         <p className="text-gray-400 mt-2">By {article.author}</p>
       </header>
 
-      <LexicalEditor article={article} />
+      <LexicalArticleEditor articleId={article.id} text={article.content} toEdit="CONTENT" />
 
       <div className="mt-4">
         <BackButton />

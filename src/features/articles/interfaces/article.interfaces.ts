@@ -33,7 +33,3 @@ export interface PaginationControlsProps {
   totalPages: number;
   onPageChange: (newPage: number) => void;
 }
-
-export interface LexicalEditorProps {
-  article: Article;
-}

@@ -1,10 +1,14 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useDispatch } from "react-redux";
-import { updateArticleContent } from "../reducers/articleReducer";
+import { updateArticleTitle, updateArticleContent } from "../reducers/articleReducer";
 import { useEffect } from "react";
 import { $getRoot } from "lexical";
 
-const SaveButtonLexicalEditor: React.FC<{ articleId: number; setIsEditable: (editable: boolean) => void }> = ({ articleId, setIsEditable }) => {
+const SaveButtonLexicalEditor: React.FC<{ articleId: number; setIsEditable: (editable: boolean) => void; toEdit: "TITLE" | "CONTENT" }> = ({
+  articleId,
+  setIsEditable,
+  toEdit,
+}) => {
   const dispatch = useDispatch();
   const [editor] = useLexicalComposerContext();
 
@@ -18,8 +22,12 @@ const SaveButtonLexicalEditor: React.FC<{ articleId: number; setIsEditable: (edi
   const handleSave = () => {
     editor.read(() => {
       const editorRoot = $getRoot();
-      const content = editorRoot.getTextContent();
-      dispatch(updateArticleContent({ id: articleId, content }));
+      const text = editorRoot.getTextContent();
+      if (toEdit === "TITLE") {
+        dispatch(updateArticleTitle({ id: articleId, title: text }));
+      } else {
+        dispatch(updateArticleContent({ id: articleId, content: text }));
+      }
       setIsEditable(false);
     });
   };

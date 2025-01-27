@@ -29,6 +29,10 @@ const articlesSlice = createSlice({
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
     },
+    updateArticleTitle(state, action: PayloadAction<{ id: number; title: string }>) {
+      const { id, title } = action.payload;
+      state.articles = state.articles.map(article => (article.id === id ? { ...article, title } : article));
+    },
     updateArticleContent(state, action: PayloadAction<{ id: number; content: string }>) {
       const { id, content } = action.payload;
       state.articles = state.articles.map(article => (article.id === id ? { ...article, content } : article));
@@ -36,5 +40,5 @@ const articlesSlice = createSlice({
   },
 });
 
-export const { setArticles, toggleFavorite, setFilter, setPage, updateArticleContent } = articlesSlice.actions;
+export const { setArticles, toggleFavorite, setFilter, setPage, updateArticleTitle, updateArticleContent } = articlesSlice.actions;
 export default articlesSlice.reducer;
